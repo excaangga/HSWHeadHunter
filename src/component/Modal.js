@@ -20,28 +20,28 @@ function Modal(){
     const navigate = useNavigate();
     const handleOnClick = () => navigate('/form');
     return(
-        <div className="fixed top-[23.5%] left-[29%] h-[53%] w-[42%] bg-white font-DMSans text-gray-700 font-medium text-center rounded-2xl">
-            <div className="text-4xl mt-20">
+        <div className="fixed top-[23.5%] left-[5%] sm:left-[8%] md:left-[15%] 2xl:left-[25%] h-[53%] w-[90%] sm:w-[85%] md:w-[70%] lg:w-[60%] 2xl:w-[50%] bg-white font-DMSans text-gray-700 font-medium text-center rounded-2xl">
+            <div className="text-xl sm:text-4xl mt-14 sm:mt-20">
                 What Are You?
             </div>
-            <div className="mt-10 flex justify-evenly">
+            <div className="mt-4 sm:mt-10 flex justify-evenly">
                 {/* left part */}
-                <div className="text-center flex flex-col items-center rounded-2xl hover:bg-blue-100 hover:cursor-pointer py-6 px-12 mx-auto mr-8" onClick={()=>{setTypeForm('jobseeker'); handleOnClick(); setShowModal(false); setShowBanner(false)}}>
+                <div className="text-center flex flex-col items-center rounded-2xl hover:bg-blue-100 hover:cursor-pointer py-6 px-6 sm:px-12 mx-auto lg:mr-8" onClick={()=>{setTypeForm('jobseeker'); handleOnClick(); setShowModal(false); setShowBanner(false)}}>
                     <img
                         src={mag_glass}
                         alt=''
                     />
-                    <div className="text-4xl text-blue-700 mt-8">
+                    <div className="text-base sm:text-3xl lg:text-4xl text-blue-700 mt-8">
                         Job Seeker
                     </div>
                 </div>
                 {/* right part */}
-                <div className="text-center flex flex-col items-center rounded-2xl hover:bg-blue-100 hover:cursor-pointer py-6 px-12 mx-auto ml-8" onClick={()=>{setTypeForm('employer'); handleOnClick(); setShowModal(false); setShowBanner(false)}}>
+                <div className="text-center flex flex-col items-center rounded-2xl hover:bg-blue-100 hover:cursor-pointer py-6 px-6 sm:px-12 mx-auto lg:ml-8" onClick={()=>{setTypeForm('employer'); handleOnClick(); setShowModal(false); setShowBanner(false)}}>
                     <img
                         src={businessman}
                         alt=''
                     />
-                    <div className="text-4xl text-blue-700 mt-8">
+                    <div className="text-base sm:text-3xl lg:text-4xl text-blue-700 mt-8">
                         Employer
                     </div>
                 </div>
