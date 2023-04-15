@@ -9,7 +9,7 @@ export const Testimony = ({
     person_position
 }) => {
     return(
-        <div className="container p-8 font-DMSans text-gray-700 w-[95%] sm:w-[31rem] 2xl:w-[90%] shadow-lg rounded-2xl mb-5 mx-auto hover:shadow-xl">
+        <div className="container p-8 font-DMSans text-gray-700 w-[95%] sm:w-[31rem] 2xl:w-[90%] shadow-lg rounded-2xl mb-5 mx-auto hover:shadow-xl border">
             <img src={ company_logo } alt='' className='mb-4 object-scale-down h-8 sm:h-14 w-20 sm:w-28' />
             <div className="text-md sm:text-xl font-bold mb-2">{ summary }</div>
             <div className="text-xs sm:text-lg mb-4">{ desc }</div>

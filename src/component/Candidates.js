@@ -3,11 +3,20 @@ import { useEffect } from 'react';
 
 function Candidates (){
 	useEffect(() => {
-		window.scrollTo(0, 0)
+		window.scrollTo(0, 0);
+		
+		const element1 = document.getElementById("header");
+		const element2 = document.getElementById("nav");			
+		element1.classList.add("bg-white");
+		element2.classList.add("bg-white");		
+		return () => {
+			element1.classList.remove("bg-white");
+			element2.classList.remove("bg-white");
+		}
 	}, []);
 	return(
 		<div className='mt-8 sm:mt-16 font-DMSans text-gray-700'>
-			<div className='text-center text-3xl xl:text-4xl 2xl:text-5xl font-medium mb-8 xl:mb-12 2xl:mb-16'>
+			<div className='text-center text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium mb-8 xl:mb-12 2xl:mb-16'>
 				Available Candidates
 			</div>
 			<div className='absolute -left-10 top-32 -z-50 bg-[url("../public/blob.png")] h-screen w-72'></div>

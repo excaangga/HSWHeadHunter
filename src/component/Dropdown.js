@@ -20,7 +20,7 @@ function Dropdown(){
     const navToVacant = () => navigate('/vacant');
     return(
         <ModalContext.Provider value={[showModal, setShowModal]}>
-            <div className="font-DMSans text-gray-400 w-full h-full bg-white flex flex-col justify-center items-center text-sm sm:text-xl font-medium">
+            <div className="font-DMSans text-gray-400 w-full h-full bg-white flex flex-col justify-center items-center text-sm sm:text-xl">
                 <div className="p-1 sm:p-3 hover:text-gray-700" onClick={()=>{navToHome(); setMobile(false)}}>
                     Home
                 </div>

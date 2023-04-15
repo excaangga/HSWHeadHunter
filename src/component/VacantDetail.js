@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import apply_cover from '../assets/apply_cover.png';
 import briefcase from '../assets/briefcase.png';
+import { useEffect } from "react";
 
 export const VacantDetail = ({
     job_name,
@@ -28,6 +29,18 @@ export const VacantDetail = ({
     const [showComponent, setShowComponent] = useState(false);
     const ref = useRef(null);
     const scrollTo = (ref.current?.scrollIntoView({behavior: 'smooth'}));
+    useEffect(() => {
+		window.scrollTo(0, 0);
+
+		const element1 = document.getElementById("header");
+		const element2 = document.getElementById("nav");			
+		element1.classList.add("bg-white");
+		element2.classList.add("bg-white");		
+		return () => {
+			element1.classList.remove("bg-white");
+			element2.classList.remove("bg-white");
+		}
+	}, []);
     return (
         <div className="mt-12 font-DMSans text-gray-700 sm:mx-14">
             {/* blob */}
@@ -101,7 +114,7 @@ export const VacantDetail = ({
             { showComponent && 
             <div className="relative container-fill flex h-auto md:mx-8 mt-16 justify-center 2xl:justify-between">
                 {/* left box */}
-                <div className="container-fill border shadow-xl rounded-tr-[3rem] sm:rounded-tr-[7rem] rounded-bl-2xl rounded-xl w-full lg:w-10/12 2xl:w-1/2 h-auto mt-3 mb-6 mx-4">
+                <div className="container-fill border shadow-xl rounded-tr-[3rem] sm:rounded-tr-[7rem] rounded-bl-2xl rounded-xl w-full lg:w-10/12 2xl:w-1/2 mt-3 mb-6 mx-4">
                     <div className="m-12 sm:mx-16 sm:my-16">
                         <div className="text-base sm:text-3xl font-medium mb-3">
                             Hello, Job Seeker!
@@ -119,11 +132,12 @@ export const VacantDetail = ({
                             <span className="text-red-500">*</span>
                         </div>
                         <input className="w-full px-3 text-sm sm:text-xl bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-3 md:mb-6" placeholder="Ex: Tax Manager" type="text"></input>
-                        <div className="text-sm sm:text-xl font-bold mb-3">
+                        {/* TODO change to props for email */}
+                        {/* <div className="text-sm sm:text-xl font-bold mb-3">
                             Apply For
                             <span className="text-red-500">*</span>
                         </div>
-                        <input className="w-full px-3 text-sm sm:text-xl bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-3 md:mb-6" placeholder="Ex: Tax Manager" type="text"></input>
+                        <input className="w-full px-3 text-sm sm:text-xl bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-3 md:mb-6" placeholder="Ex: Tax Manager" type="text"></input> */}
                         <div className="text-sm sm:text-xl font-bold mb-3">
                             Upload CV
                             <span className="text-red-500">*</span>
@@ -145,6 +159,7 @@ export const VacantDetail = ({
                     <img 
                         src={apply_cover}
                         alt=''
+                        className="h-full"
                     />
                     <div className="absolute -right-8 top-24 h-[72px] w-[300px] bg-white rounded-2xl flex items-center justify-between shadow-xl border">
                         <img

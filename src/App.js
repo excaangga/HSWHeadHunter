@@ -80,7 +80,7 @@ function App() {
                     </button>
                     { mobile &&
                       <div className='absolute left-0 top-0 w-screen h-screen'>
-                        <div className='w-full z-50 h-[45%]'>
+                        <div className='w-full z-50 h-[45%] sm:h-[60%]'>
                           <Dropdown />
                         </div>
                         <div className='w-full z-40 h-[55%] bg-black bg-opacity-50' onClick={()=>setMobile(!mobile)}>
@@ -92,30 +92,38 @@ function App() {
                 </div>
                 {/* Floating action button */}
                 <div className='fixed w-auto h-auto top-[40%] right-4 z-20 bg-white space-y-1 rounded-full shadow-xl border'>
-                    <div className='rounded-full hover:shadow-md hover:border'>
-                      <img 
-                        src={Gmail}
-                        className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
-                      />
-                    </div>
-                    <div className='rounded-full hover:shadow-md hover:border'>
-                      <img 
-                        src={Whatsapp}
-                        className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
-                      />
-                    </div>
-                    <div className='rounded-full hover:shadow-md hover:border'>
-                      <img 
-                        src={Youtube}
-                        className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
-                      />
-                    </div>
-                    <div className='rounded-full hover:shadow-md hover:border'>
-                      <img 
-                        src={Linkedin}
-                        className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
-                      />
-                    </div>
+                    <a href="mailto:ClientRelation@hswheadhunter.com" target="_blank">
+                      <div className='rounded-full hover:shadow-md hover:border'>
+                        <img
+                          src={Gmail}
+                          className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
+                        />
+                      </div>
+                    </a>
+                    <a href="http://wa.me/+628122021038" target="_blank">
+                      <div className='rounded-full hover:shadow-md hover:border'>
+                        <img
+                          src={Whatsapp}
+                          className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
+                        />
+                      </div>
+                    </a>
+                    <a href="https://youtube.com/@hswheadhunterofficial665" target="_blank">
+                      <div className='rounded-full hover:shadow-md hover:border'>
+                        <img
+                          src={Youtube}
+                          className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
+                        />
+                      </div>
+                    </a>
+                    <a href="https://www.linkedin.com/company/hsw-headhunter/" target="_blank">
+                      <div className='rounded-full hover:shadow-md hover:border'>
+                        <img
+                          src={Linkedin}
+                          className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
+                        />
+                      </div>
+                    </a>
                 </div>
                 <Routes>
                   <Route exact path='/' element={< Home />}>
@@ -141,42 +149,44 @@ function App() {
                       </div>
                     </div>
                 }
+
                 {/* Banner goes here */}
-                <div className='hidden lg:block'>
+                {/* <div className='hidden lg:block'>
                   {showBanner &&
                     <Banner />
                   }
-                </div>        
+                </div>         */}
+
                 {/* Horizontal Line */}
-                <div className='h-1 border-b-2 border-gray-300 mb-14 mt-14 sm:mt-0 sm:mb-32'>
+                <div className='h-1 border-b-2 border-gray-300 mb-14 mt-14 sm:mb-20'>
                 </div>
                 {/* Footer links goes here */}
-                <div className='container-fill  mx-auto w-5/12 text-center mb-14 sm:mb-28'>
-                  <div className='container-fill flex justify-center items-center mb-1 sm:mb-4'>
+                <div className='container-fill  mx-auto w-7/12 2xl:w-6/12 text-center mb-14 sm:mb-20'>
+                  {/* <div className='container-fill flex justify-center items-center mb-1 sm:mb-4'>
                     <img src={ logo } alt='' className='object-scale-down h-8 sm:h-14 w-8 sm:w-14' />
                   </div>
                   <div className='text-md sm:text-xl mb-12 text-gray-700'>
                       HSW Headhunter
-                  </div>
+                  </div> */}
                   <div className='xl:flex space-y-2 sm:space-y-4 justify-between items-end text-md sm:text-2xl text-blue-700 font-medium' onClick={()=>{setShowModal(false); setShowBanner(true)}}>
                       <div><Link to="/">Homepage</Link></div>
                       <div><Link to="/industries">Industries</Link></div>
-                      <div><Link to="/candidates">Candidates</Link></div>
+                      <div><Link to="/candidates">Available Candidates</Link></div>
                       <div><Link to="/vacant">Job Gallery</Link></div>
                   </div>
                 </div>
               </Router>
               {/* copyright and subs button goes here */}
-              <div className='container-fill mx-auto justify-between xl:flex space-y-12 xl:space-y-0  items-center pb-4 w-10/12'>
-                <div className='text-xs sm:text-xl text-blue-500 text-center'>
-                  Copyright © 2023 HSW Headhunter | All Rights Reserved
+              <div className='container-fill mx-auto justify-center xl:flex space-y-12 xl:space-y-0  items-center pb-16 w-10/12'>
+                <div className='text-xs sm:text-xl text-gray-500 text-center'>
+                  Rejuvenated 04022023 | HSW Headhunter
                 </div>
-                <div className='2xl:w-7/12 flex justify-end items-center'>
+                {/* <div className='2xl:w-7/12 flex justify-end items-center'>
                   <div className="container-fill flex mb-3 bg-white w-full h-12 sm:h-16 2xl:w-7/12 items-center justify-between rounded-full shadow-xl hover:shadow-2xl border">
                       <input className="text-black px-3 sm:mx-6 text-xs sm:text-xl bg-white h-10 sm:h-14 rounded-full md:mr-16 focus:outline-none" placeholder="Enter your email" type="text"></input>
                       <button className="bg-blue-700 text-white text-xs sm:text-lg px-3 py-2 mx-2 h-8 sm:h-12 w-24 sm:w-32 flex items-center justify-center rounded-full hover:bg-blue-500">Subscribe</button>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </BannerContext.Provider>
