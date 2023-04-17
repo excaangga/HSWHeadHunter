@@ -16,7 +16,7 @@ function Industries (){
 	}, []);
 	return(
 		<div className='mt-8 sm:mt-16 font-DMSans'>
-			<div className='text-center text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium text-gray-700 mb-8 xl:mb-12 2xl:mb-16'>
+			<div className='text-center text-2xl sm:text-4xl lg:text-5xl 2xl:text-6xl font-medium text-gray-700 mb-8 xl:mb-12 2xl:mb-16'>
 				Our Focus Industries
 			</div>
 			<div className='absolute -left-16 top-1/2 bg-[url("../public/blob.png")] h-3/4 w-72 -z-50'></div>

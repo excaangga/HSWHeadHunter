@@ -16,7 +16,7 @@ function Candidates (){
 	}, []);
 	return(
 		<div className='mt-8 sm:mt-16 font-DMSans text-gray-700'>
-			<div className='text-center text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium mb-8 xl:mb-12 2xl:mb-16'>
+			<div className='text-center text-2xl sm:text-4xl lg:text-5xl 2xl:text-6xl font-medium mb-8 xl:mb-12 2xl:mb-16'>
 				Available Candidates
 			</div>
 			<div className='absolute -left-10 top-32 -z-50 bg-[url("../public/blob.png")] h-screen w-72'></div>

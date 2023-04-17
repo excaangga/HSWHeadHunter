@@ -83,7 +83,7 @@ function Home (){
 		}
 	}
 	useEffect(() => {
-		window.scrollTo(0, 0);
+		// window.scrollTo(0, 0);
 		window.addEventListener("scroll", handleScroll);
 		window.addEventListener("resize", handleResize);
 		handleScroll();
@@ -149,22 +149,22 @@ function Home (){
 			{/* end filler */}
 
 			{/* desc */}
-			<div className='container-fill lg:grid grid-cols-2 justify-center lg:mx-8 xl:mx-20 mb-16 xl:mb-20 2xl:mb-32 sm:mt-6'>
+			<div className='container-fill lg:grid grid-cols-2 justify-center lg:mx-8 xl:mx-20 mb-4 xl:mb-12 2xl:mb-20 sm:mt-6'>
 				{/* left desc */}
-				<div className='self-center col-span-1 text-gray-700 lg:w-10/12 sm:my-10'>
-					<div className='text-2xl sm:text-4xl lg:text-5xl xl:text-6xl mb-5 font-medium text-center lg:text-start'>
+				<div className='self-center col-span-1 text-gray-700 lg:w-10/12 sm:my-10 lg:my-0 lg:mt-10'>
+					<div className='text-2xl sm:text-4xl lg:text-5xl 2xl:text-6xl mb-5 font-medium text-center lg:text-start'>
 						Why Us?
 					</div>
-					<div className='text-sm sm:text-base xl:text-xl 2xl:text-2xl mb-5 text-justify lg:text-start'>
+					<div className='text-sm sm:text-base 2xl:text-2xl mb-5 text-justify lg:text-start'>
 						Jakarta based professional headhunter which focus on searching experience candidates for our clients who put “ me” as top priority for their investment and business.
 					</div>
-					<div className='text-sm sm:text-base xl:text-xl 2xl:text-2xl mb-5 text-justify lg:text-start'>
+					<div className='text-sm sm:text-base 2xl:text-2xl mb-5 text-justify lg:text-start'>
 					Appointed by global clients in Europe, USA, Japan, Singapore, Malaysia Australia, North African, Middle East, Vietnam, Philippines.
 					</div>
-					<div className='text-sm sm:text-base xl:text-xl 2xl:text-2xl mb-10 xl:mb-14 text-justify lg:text-start'>
+					<div className='text-sm sm:text-base 2xl:text-2xl mb-10 xl:mb-14 text-justify lg:text-start'>
 					Our candidates come from Indonesian, Singaporean, Malaysian, Westerner, Australian, Philippines, Indian and Arabian.
 					</div>
-					<div className='flex flex-col justify-center items-center space-y-4 xl:space-y-8 mb-10 w-[90%]'>
+					<div className='flex flex-col justify-center items-center space-y-4 xl:space-y-8 lg:mb-10 lg:w-[90%]'>
 						<div className='container flex space-x-4 justify-between'>
 							<img
 								src={active_client}
@@ -207,7 +207,7 @@ function Home (){
 
 			{/* partner */}
 			<div className='container-fill justify-center mb-16 xl:mb-20 2xl:mb-32'>
-				<div className='text-2xl sm:text-4xl lg:text-5xl xl:text-6xl text-gray-700 text-center font-medium mb-5'>
+				<div className='text-2xl sm:text-4xl lg:text-5xl 2xl:text-6xl text-gray-700 text-center font-medium mb-5'>
 					Our Top Global Clients
 				</div>
 				<Slider {...settings_client}>
@@ -232,7 +232,7 @@ function Home (){
 
 			{/* testimony */}
 			<div className='container-fill mb-16 xl:mb-20 2xl:mb-32 mx-auto'>
-				<div className='text-2xl sm:text-4xl lg:text-5xl xl:text-6xl text-gray-700 text-center font-medium mb-5'>
+				<div className='text-2xl sm:text-4xl lg:text-5xl 2xl:text-6xl text-gray-700 text-center font-medium mb-5'>
 					Client Testimony
 				</div>
 				<Slider {...settings_testimony}>
