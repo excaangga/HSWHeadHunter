@@ -1,19 +1,34 @@
 import React from 'react';
 import VacantList from './VacantList';
-import { useEffect } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-function Vacant (){
+function Vacant() {
 	let job_name = 'Sr. Tax Specialist';
 	let location = 'Jakarta, Indonesia';
-    let work_time = 'Full-time';
-    let position = 'Electrical Manufacturing';
+	let work_time = 'Full-time';
+	let position = 'Electrical Manufacturing';
+	const [jobs, setJobs] = useState([]);
 	useEffect(() => {
 		window.scrollTo(0, 0);
 
 		const element1 = document.getElementById("header");
-		const element2 = document.getElementById("nav");			
+		const element2 = document.getElementById("nav");
 		element1.classList.add("bg-white");
-		element2.classList.add("bg-white");		
+		element2.classList.add("bg-white");
+
+		const fetchData = async () => {
+			try {
+				const jobs = await axios.get('http://localhost:3030/jobs');
+				setJobs(jobs.data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		// Fetch data initially
+		fetchData();
+
 		return () => {
 			element1.classList.remove("bg-white");
 			element2.classList.remove("bg-white");
@@ -30,54 +45,19 @@ function Vacant (){
 			<div className='hidden sm:block absolute rotate-180 right-0 bottom-0 -z-50 bg-[url("../public/blob.png")] bg-no-repeat h-full w-72'></div>
 			{/* scrollable content */}
 			<div className='container mx-auto max-h-[21rem] sm:max-h-[34rem] overflow-y-auto w-full md:w-3/4 xl:w-1/2'>
-				<VacantList 
-					job_name={job_name}
-					location={location}
-					work_time={work_time}
-					position={position}
-				/>
-				<VacantList 
-					job_name={job_name}
-					location={location}
-					work_time={work_time}
-					position={position}
-				/>
-				<VacantList 
-					job_name={job_name}
-					location={location}
-					work_time={work_time}
-					position={position}
-				/>
-				<VacantList 
-					job_name={job_name}
-					location={location}
-					work_time={work_time}
-					position={position}
-				/>
-				<VacantList 
-					job_name={job_name}
-					location={location}
-					work_time={work_time}
-					position={position}
-				/>
-				<VacantList 
-					job_name={job_name}
-					location={location}
-					work_time={work_time}
-					position={position}
-				/>
-				<VacantList 
-					job_name={job_name}
-					location={location}
-					work_time={work_time}
-					position={position}
-				/>
-				<VacantList 
-					job_name={job_name}
-					location={location}
-					work_time={work_time}
-					position={position}
-				/>
+				{jobs.map((item) => item.shown == 1 ? (
+					<div key={item.id}>
+						<Link to={`/vacant/vacantDetail/${item.id}`}>
+							<VacantList
+								job_name={item.job_name}
+								location={item.location}
+								work_time={item.work_time}
+								position={item.position}
+							/>
+						</Link>
+					</div>
+				) : null
+				)}
 			</div>
 		</div>
 	);

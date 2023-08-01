@@ -1,18 +1,18 @@
 import './App.css';
 import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
+  BrowserRouter as Router,
+  Routes,
+  Route,
   Link
 } from 'react-router-dom';
 import Home from './component/Home';
 import Industries from './component/Industries';
 import Candidates from './component/Candidates';
 import Vacant from './component/Vacant';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Banner from './component/Banner';
 import logo from './assets/logo.png';
-import VacantDetailCaller from './component/VacantDetailCaller';
+import VacantDetail from './component/VacantDetail';
 import Modal from './component/Modal';
 import { TypeContext } from './component/TypeContext';
 import { FormPage } from './component/FormPage';
@@ -24,12 +24,56 @@ import Gmail from './assets/Gmail.png';
 import Whatsapp from './assets/Whatsapp.png';
 import Youtube from './assets/Youtube.png';
 import Linkedin from './assets/Linkedin.png';
+import axios from 'axios';
 
 function App() {
   const [mobile, setMobile] = useState(false)
   const [showModal, setShowModal] = useState(false);
   const [typeForm, setTypeForm] = useState('');
   const [showBanner, setShowBanner] = useState(true);
+  const [gmail, setGmail] = useState([]);
+  const [linkedin, setLinkedin] = useState([]);
+  const [wa, setWa] = useState([]);
+  const [youtube, setYoutube] = useState([]);
+  var gmail_url, linkedin_url, wa_url, youtube_url;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const gmail = await axios.get('http://localhost:3030/social_media_gmail');
+        setGmail(gmail.data);
+        const linkedin = await axios.get('http://localhost:3030/social_media_linkedin');
+        setLinkedin(linkedin.data);
+        const wa = await axios.get('http://localhost:3030/social_media_wa');
+        setWa(wa.data);
+        const youtube = await axios.get('http://localhost:3030/social_media_youtube');
+        setYoutube(youtube.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    // Fetch data initially
+    fetchData();
+  }, []);
+  gmail.map((item, index) =>
+    item.shown === 1 ? (
+      gmail_url = "mailto:" + item.url
+    ) : null
+  )
+  linkedin.map((item, index) =>
+    item.shown === 1 ? (
+      linkedin_url = item.url
+    ) : null
+  )
+  wa.map((item, index) =>
+    item.shown === 1 ? (
+      wa_url = item.url
+    ) : null
+  )
+  youtube.map((item, index) =>
+    item.shown === 1 ? (
+      youtube_url = item.url
+    ) : null
+  )
   return (
     <ModalContext.Provider value={[showModal, setShowModal]}>
       <TypeContext.Provider value={[typeForm, setTypeForm]}>
@@ -43,7 +87,7 @@ function App() {
                   <nav id='nav' className='lg:bg-white flex items-center'>
                     <div className='h-8 sm:h-14 w-8 sm:w-14 lg:mx-8'>
                       <img
-                        src={ logo }
+                        src={logo}
                         className='object-scale-down h-8 sm:h-14 w-8 sm:w-14'
                         alt=''
                       />
@@ -51,20 +95,20 @@ function App() {
                     <div className='lg:hidden text-gray-700 ml-4 font-medium sm:text-xl'>
                       HSW Headhunter
                     </div>
-                    <div className='hidden items-center lg:space-x-8 lg:flex lg:ml-8 xl:space-x-16 xl:ml-14 text-xl' onClick={()=>{setShowModal(false); setShowBanner(true)}}>
+                    <div className='hidden items-center lg:space-x-8 lg:flex lg:ml-8 xl:space-x-16 xl:ml-14 text-xl' onClick={() => { setShowModal(false); setShowBanner(true) }}>
                       <span className='text-gray-500 hover:text-gray-900'><Link to="/">Homepage</Link></span>
                       <span className='text-gray-500 hover:text-gray-900'><Link to="/industries">Industries</Link></span>
                       <span className='text-gray-500 hover:text-gray-900'><Link to="/candidates">Candidates</Link></span>
                       <span className='text-gray-500 hover:text-gray-900'><Link to="/vacant">Job Gallery</Link></span>
                     </div>
                   </nav>
-                  <div className='hidden lg:block cursor-default px-10 py-2 md:mx-8 bg-blue-700 rounded-xl hover:bg-blue-500' onClick={()=>setShowModal(true)}>
-                      <h3 className="text-white text-xl">Contact Us</h3>
+                  <div className='hidden lg:block cursor-default px-10 py-2 md:mx-8 bg-blue-700 rounded-xl hover:bg-blue-500' onClick={() => setShowModal(true)}>
+                    <h3 className="text-white text-xl">Contact Us</h3>
                   </div>
                   {/* mobile nav thingies */}
                   <div className="lg:hidden flex items-center">
                     {/* mobile hamburger button */}
-                    <button className="outline-none mobile-menu-button" onClick={()=>setMobile(!mobile)}>
+                    <button className="outline-none mobile-menu-button" onClick={() => setMobile(!mobile)}>
                       <svg
                         className="w-6 h-6 text-gray-900"
                         x-show="!showMenu"
@@ -75,16 +119,16 @@ function App() {
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                       >
-                      <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
                       </svg>
                     </button>
-                    { mobile &&
+                    {mobile &&
                       <div className='absolute left-0 top-0 w-screen h-screen'>
                         <div className='w-full z-50 h-[45%] sm:h-[60%]'>
                           <Dropdown />
                         </div>
-                        <div className='w-full z-40 h-[55%] bg-black bg-opacity-50' onClick={()=>setMobile(!mobile)}>
-          
+                        <div className='w-full z-40 h-[55%] bg-black bg-opacity-50' onClick={() => setMobile(!mobile)}>
+
                         </div>
                       </div>
                     }
@@ -92,38 +136,38 @@ function App() {
                 </div>
                 {/* Floating action button */}
                 <div className='fixed w-auto h-auto top-[40%] right-4 z-20 bg-white space-y-1 rounded-full shadow-xl border'>
-                    <a href="mailto:ClientRelation@hswheadhunter.com" target="_blank">
-                      <div className='rounded-full hover:shadow-md hover:border'>
-                        <img
-                          src={Gmail}
-                          className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
-                        />
-                      </div>
-                    </a>
-                    <a href="http://wa.me/+628122021038" target="_blank">
-                      <div className='rounded-full hover:shadow-md hover:border'>
-                        <img
-                          src={Whatsapp}
-                          className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
-                        />
-                      </div>
-                    </a>
-                    <a href="https://youtube.com/@hswheadhunterofficial665" target="_blank">
-                      <div className='rounded-full hover:shadow-md hover:border'>
-                        <img
-                          src={Youtube}
-                          className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
-                        />
-                      </div>
-                    </a>
-                    <a href="https://www.linkedin.com/company/hsw-headhunter/" target="_blank">
-                      <div className='rounded-full hover:shadow-md hover:border'>
-                        <img
-                          src={Linkedin}
-                          className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
-                        />
-                      </div>
-                    </a>
+                  <a href={gmail_url} target="_blank">
+                    <div className='rounded-full hover:shadow-md hover:border'>
+                      <img
+                        src={Gmail}
+                        className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
+                      />
+                    </div>
+                  </a>
+                  <a href={wa_url} target="_blank">
+                    <div className='rounded-full hover:shadow-md hover:border'>
+                      <img
+                        src={Whatsapp}
+                        className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
+                      />
+                    </div>
+                  </a>
+                  <a href={youtube_url} target="_blank">
+                    <div className='rounded-full hover:shadow-md hover:border'>
+                      <img
+                        src={Youtube}
+                        className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
+                      />
+                    </div>
+                  </a>
+                  <a href={linkedin_url} target="_blank">
+                    <div className='rounded-full hover:shadow-md hover:border'>
+                      <img
+                        src={Linkedin}
+                        className='object-scale-up w-10 sm:w-14 h-10 sm:h-14'
+                      />
+                    </div>
+                  </a>
                 </div>
                 <Routes>
                   <Route exact path='/' element={< Home />}>
@@ -134,20 +178,20 @@ function App() {
                   </Route>
                   <Route exact path='/vacant' element={< Vacant />}>
                   </Route>
-                  <Route exact path='/vacant/vacantDetail' element={< VacantDetailCaller />}>
+                  <Route exact path='/vacant/vacantDetail/:id' element={< VacantDetail />}>
                   </Route>
                   <Route exact path='/form' element={< FormPage type={typeForm} />}>
                   </Route>
                 </Routes>
                 {/* Modal things */}
-                { showModal &&
-                    <div className=''>
-                      <div className='fixed z-50'>
-                        <Modal />
-                      </div>
-                      <div className='fixed top-0 h-screen w-screen z-40 bg-black bg-opacity-50' onClick={()=>setShowModal(false)}>
-                      </div>
+                {showModal &&
+                  <div className=''>
+                    <div className='fixed z-50'>
+                      <Modal />
                     </div>
+                    <div className='fixed top-0 h-screen w-screen z-40 bg-black bg-opacity-50' onClick={() => setShowModal(false)}>
+                    </div>
+                  </div>
                 }
 
                 {/* Banner goes here */}
@@ -168,11 +212,11 @@ function App() {
                   <div className='text-md sm:text-xl mb-12 text-gray-700'>
                       HSW Headhunter
                   </div> */}
-                  <div className='xl:flex space-y-2 sm:space-y-4 justify-between items-end text-md sm:text-2xl text-blue-700 font-medium' onClick={()=>{setShowModal(false); setShowBanner(true)}}>
-                      <div><Link to="/">Homepage</Link></div>
-                      <div><Link to="/industries">Industries</Link></div>
-                      <div><Link to="/candidates">Available Candidates</Link></div>
-                      <div><Link to="/vacant">Job Gallery</Link></div>
+                  <div className='xl:flex space-y-2 sm:space-y-4 justify-between items-end text-md sm:text-2xl text-blue-700 font-medium' onClick={() => { setShowModal(false); setShowBanner(true) }}>
+                    <div><Link to="/">Homepage</Link></div>
+                    <div><Link to="/industries">Industries</Link></div>
+                    <div><Link to="/candidates">Available Candidates</Link></div>
+                    <div><Link to="/vacant">Job Gallery</Link></div>
                   </div>
                 </div>
               </Router>
@@ -195,6 +239,6 @@ function App() {
     </ModalContext.Provider>
   );
 }
-  
+
 
 export default App;

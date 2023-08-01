@@ -8,9 +8,9 @@ export const VacantList = ({
     position
 }) => {
 	const navigate = useNavigate();
-    const handleOnClick = () => navigate('/vacant/vacantDetail');
+    // const handleOnClick = () => navigate('/vacant/vacantDetail');
     return (
-        <div className="font-DMSans cursor-default container-fill rounded-xl flex sm:space-x-12 md:space-x-20 xl:space-x-0 justify-between mx-6 sm:mx-0 sm:justify-center xl:justify-between lg:mb-4 px-4 py-2 hover:bg-gray-100" onClick={ handleOnClick }>
+        <div className="font-DMSans cursor-default container-fill rounded-xl flex sm:space-x-12 md:space-x-20 xl:space-x-0 justify-between mx-6 sm:mx-0 lg:mb-4 px-4 py-2 hover:bg-gray-100">
             <div>
                 <div className="font-medium text-md sm:text-xl lg:text-2xl 2xl:text-3xl text-blue-700">
                     ► { job_name }

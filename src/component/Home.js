@@ -1,32 +1,22 @@
 import React from 'react';
+import axios from 'axios';
 import card_1 from '../assets/card_1.png';
 import card_2 from '../assets/card_2.png';
 import card_3 from '../assets/card_3.png';
 import card_4 from '../assets/card_4.png';
 import Testimony from './Testimony';
-import temp_logo from '../assets/temp_logo.png';
-import temp_picture from '../assets/temp_picture.jpeg';
-import client_1 from '../assets/client_1.png';
-import client_2 from '../assets/client_2.png';
-import client_3 from '../assets/client_3.png';
-import client_4 from '../assets/client_4.png';
-import client_5 from '../assets/client_5.png';
 import Slider from 'react-slick/lib/slider';
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from 'react';
-import active_client from '../assets/100Clients.png';
+import icon_active_client from '../assets/100Clients.png';
 import key_industries from '../assets/14KeyIndustries.png';
 import shorlisted_candidates from '../assets/50kShortlistedCandidates.png';
 import countries from '../assets/15Countries.png';
 import sameday_service from '../assets/SamedayService.png';
 import hospitality from '../assets/247Hospitality.png';
-import bg_1280 from '../assets/1280.png';
-import bg_1024 from '../assets/1024.png';
-import bg_768 from '../assets/768.png';
-import bg_640 from '../assets/640.png';
 
-function Home (){
+function Home() {
 	const settings_client = {
 		dots: true,
 		infinite: true,
@@ -65,15 +55,15 @@ function Home (){
 	};
 	const [breakpoint, setBreakpoint] = useState('');
 	function handleResize() {
-		if (window.innerWidth < 1280){setBreakpoint('sm')}
-		else if (window.innerWidth >= 1280 && window.innerWidth < 1536){setBreakpoint('xl')}
-		else if (window.innerWidth >= 1536){setBreakpoint('2xl')}
+		if (window.innerWidth < 1280) { setBreakpoint('sm') }
+		else if (window.innerWidth >= 1280 && window.innerWidth < 1536) { setBreakpoint('xl') }
+		else if (window.innerWidth >= 1536) { setBreakpoint('2xl') }
 	};
 	function handleScroll() {
 		const scrollPosition = window.scrollY;
 		const targetPosition = 270;
 		const element1 = document.getElementById("header");
-		const element2 = document.getElementById("nav");			
+		const element2 = document.getElementById("nav");
 		if (scrollPosition >= targetPosition) {
 			element1.classList.add("bg-white");
 			element2.classList.add("bg-white");
@@ -82,32 +72,52 @@ function Home (){
 			element2.classList.remove("bg-white");
 		}
 	}
+	const [clients, setClients] = useState([]);
+	const [heroImage, setHeroImage] = useState([]);
+	const [testimony, setTestimony] = useState([]);
 	useEffect(() => {
 		// window.scrollTo(0, 0);
 		window.addEventListener("scroll", handleScroll);
 		window.addEventListener("resize", handleResize);
 		handleScroll();
 		handleResize();
-		return () => {window.removeEventListener("scroll", handleScroll); window.removeEventListener('resize', handleResize);};
+
+		const fetchData = async () => {
+			try {
+				const active_clients = await axios.get('http://localhost:3030/active_clients');
+				setClients(active_clients.data);
+				const hero_images = await axios.get('http://localhost:3030/hero_image');
+				setHeroImage(hero_images.data);
+				const testimony = await axios.get('http://localhost:3030/testimony_card');
+				setTestimony(testimony.data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		// Fetch data initially
+		fetchData();
+		return () => { window.removeEventListener("scroll", handleScroll); window.removeEventListener('resize', handleResize); };
 	}, []);
 	var settings_testimony;
-	switch (breakpoint) {
-		case 'sm':
-			settings_testimony=settings_sm
-			break;
-		case 'xl':
-			settings_testimony=settings_xl
-			break;
-		case '2xl':
-			settings_testimony=settings_2xl
-			break;
-		default:
-			break;
+	if (breakpoint === 'sm') {
+		settings_testimony = settings_sm;
+	} else if (breakpoint === 'xl') {
+		if (testimony.length === 1) {
+			settings_testimony = settings_sm;
+		} else if (testimony.length >= 2) {
+			settings_testimony = settings_xl;
+		}
+	} else if (breakpoint === '2xl') {
+		if (testimony.length === 2) {
+			settings_testimony = settings_xl;
+		} else if (testimony.length >= 3) {
+			settings_testimony = settings_2xl;
+		}
 	}
 	console.log(breakpoint);
-	return(
+	return (
 		// main content goes here
-		<div className='mx-6 sm:mx-16 sm:mt-4 font-DMSans '>			
+		<div className='mx-6 sm:mx-16 sm:mt-4 font-DMSans '>
 			{/* filler */}
 			{/* <div className='relative z-10 container-fill w-full h-[270px] sm:h-[400px] lg:h-[30rem] xl:h-[40rem] 2xl:h-[58rem] lg:bg-[url("../src/assets/bg.png")] lg:bg-contain lg:bg-no-repeat lg:bg-center'>				
 				<div className='text-center font-bold text-2xl sm:text-4xl lg:text-5xl xl:text-6xl text-[#404040] pt-10 sm:pt-20 md:pt-26 lg:pt-[5rem] xl:pt-32 sm:pb-6'>
@@ -117,35 +127,51 @@ function Home (){
 					Delay onboard will lose your target profit
 				</div>
 			</div> */}
-			<img
-				src={bg_1280}
-				className='hidden xl:block w-full'
-			/>
-			<img
-				src={bg_1024}
-				className='hidden lg:block xl:hidden w-full'
-			/>
+			{heroImage.map((item) => item.breakpoint_flag === "1280" ? (
+				<div key={item.id}>
+					<img
+						src={item.image_path}
+						className='hidden xl:block w-full'
+					/>
+				</div>
+			) : null)
+			}
+			{heroImage.map((item) => item.breakpoint_flag === "1024" ? (
+				<div key={item.id}>
+					<img
+						src={item.image_path}
+						className='hidden lg:block xl:hidden w-full'
+					/>
+				</div>
+			) : null)
+			}
 			{/* filler mobile */}
-			<div>
-				<img
-					src={bg_768}
-					className='hidden md:block lg:hidden relative top-0 left-0 w-full opacity-0'
-				/>
-				<img
-					src={bg_768}
-					className='hidden md:block lg:hidden absolute top-0 left-0 w-full'
-				/>
-			</div>
-			<div>
-				<img
-					src={bg_640}
-					className='md:hidden relative top-0 left-0 w-full opacity-0'
-				/>
-				<img
-					src={bg_640}
-					className='md:hidden absolute top-0 left-0 w-full'
-				/>
-			</div>
+			{heroImage.map((item) => item.breakpoint_flag === "768" ? (
+				<div key={item.id}>
+					<img
+						src={item.image_path}
+						className='hidden md:block lg:hidden relative top-0 left-0 w-full opacity-0'
+					/>
+					<img
+						src={item.image_path}
+						className='hidden md:block lg:hidden absolute top-0 left-0 w-full'
+					/>
+				</div>
+			) : null)
+			}
+			{heroImage.map((item) => item.breakpoint_flag === "640" ? (
+				<div key={item.id}>
+					<img
+						src={item.image_path}
+						className='md:hidden relative top-0 left-0 w-full opacity-0'
+					/>
+					<img
+						src={item.image_path}
+						className='md:hidden absolute top-0 left-0 w-full'
+					/>
+				</div>
+			) : null)
+			}
 			{/* end filler */}
 
 			{/* desc */}
@@ -159,15 +185,15 @@ function Home (){
 						Jakarta based professional headhunter which focus on searching experience candidates for our clients who put “ me” as top priority for their investment and business.
 					</div>
 					<div className='text-sm sm:text-base 2xl:text-2xl mb-5 text-justify lg:text-start'>
-					Appointed by global clients in Europe, USA, Japan, Singapore, Malaysia Australia, North African, Middle East, Vietnam, Philippines.
+						Appointed by global clients in Europe, USA, Japan, Singapore, Malaysia Australia, North African, Middle East, Vietnam, Philippines.
 					</div>
 					<div className='text-sm sm:text-base 2xl:text-2xl mb-10 xl:mb-14 text-justify lg:text-start'>
-					Our candidates come from Indonesian, Singaporean, Malaysian, Westerner, Australian, Philippines, Indian and Arabian.
+						Our candidates come from Indonesian, Singaporean, Malaysian, Westerner, Australian, Philippines, Indian and Arabian.
 					</div>
 					<div className='flex flex-col justify-center items-center space-y-4 xl:space-y-8 lg:mb-10 lg:w-[90%]'>
 						<div className='container flex space-x-4 justify-between'>
 							<img
-								src={active_client}
+								src={icon_active_client}
 								className='object-scale-down h-[25%] w-[25%]'
 							/>
 							<img
@@ -211,113 +237,39 @@ function Home (){
 					Our Top Global Clients
 				</div>
 				<Slider {...settings_client}>
-					<div>
-						<img src={client_1} alt='' className="object-scale-down w-10/12 mx-auto" />
-					</div> 
-					<div>
-						<img src={client_2} alt='' className="object-scale-down w-10/12 mx-auto" />
-					</div> 
-					<div>
-						<img src={client_3} alt='' className="object-scale-down w-10/12 mx-auto" />
-					</div> 
-					<div>
-						<img src={client_4} alt='' className="object-scale-down w-10/12 mx-auto" />
-					</div>
-					<div>
-						<img src={client_5} alt='' className="object-scale-down w-10/12 mx-auto" />
-					</div>
+					{clients.map((item) => item.shown == 1 ? (
+						<div key={item.id}>
+							<img src={item.image_path} alt='' className="object-scale-down w-10/12 mx-auto" />
+						</div>
+					) : null
+					)}
 				</Slider>
 			</div>
 			{/* end partner */}
 
 			{/* testimony */}
-			<div className='container-fill mb-16 xl:mb-20 2xl:mb-32 mx-auto'>
+			{/* <div className='container-fill mb-16 xl:mb-20 2xl:mb-32 mx-auto'>
 				<div className='text-2xl sm:text-4xl lg:text-5xl 2xl:text-6xl text-gray-700 text-center font-medium mb-5'>
 					Client Testimony
 				</div>
 				<Slider {...settings_testimony}>
-					{/* <div id='slide1' className='container-fill justify-center flex'> */}
-						<Testimony
-							company_logo={ temp_logo }
-							summary="THIS IS AMAZINGGG"
-							desc="Cillum deserunt magna officia dolor duis eiusmod."
-							person_picture={ temp_picture }
-							person_name='Parry Hotter'
-							person_position='Ketua Osis Hogwarts'
-						/>
-						<Testimony
-							company_logo={ temp_logo }
-							summary="THIS IS AMAZINGGG"
-							desc="Cillum deserunt magna officia dolor duis eiusmod."
-							person_picture={ temp_picture }
-							person_name='Parry Hotter'
-							person_position='Ketua Osis Hogwarts'
-						/>
-						<Testimony
-							company_logo={ temp_logo }
-							summary="THIS IS AMAZINGGG"
-							desc="Cillum deserunt magna officia dolor duis eiusmod."
-							person_picture={ temp_picture }
-							person_name='Parry Hotter'
-							person_position='Ketua Osis Hogwarts'
-						/>
-					{/* </div> */}
-					{/* <div id='slide2' className='container-fill justify-center flex'> */}
-						<Testimony
-							company_logo={ temp_logo }
-							summary="THIS IS AMAZINGGG"
-							desc="Cillum deserunt magna officia dolor duis eiusmod."
-							person_picture={ temp_picture }
-							person_name='Parry Hotter'
-							person_position='Ketua Osis Hogwarts'
-						/>
-						<Testimony
-							company_logo={ temp_logo }
-							summary="THIS IS AMAZINGGG"
-							desc="Cillum deserunt magna officia dolor duis eiusmod."
-							person_picture={ temp_picture }
-							person_name='Parry Hotter'
-							person_position='Ketua Osis Hogwarts'
-						/>
-						<Testimony
-							company_logo={ temp_logo }
-							summary="THIS IS AMAZINGGG"
-							desc="Cillum deserunt magna officia dolor duis eiusmod."
-							person_picture={ temp_picture }
-							person_name='Parry Hotter'
-							person_position='Ketua Osis Hogwarts'
-						/>
-					{/* </div> */}
-					{/* <div id='slide3' className='container-fill justify-center flex'> */}
-						<Testimony
-							company_logo={ temp_logo }
-							summary="THIS IS AMAZINGGG"
-							desc="Cillum deserunt magna officia dolor duis eiusmod."
-							person_picture={ temp_picture }
-							person_name='Parry Hotter'
-							person_position='Ketua Osis Hogwarts'
-						/>
-						<Testimony
-							company_logo={ temp_logo }
-							summary="THIS IS AMAZINGGG"
-							desc="Cillum deserunt magna officia dolor duis eiusmod."
-							person_picture={ temp_picture }
-							person_name='Parry Hotter'
-							person_position='Ketua Osis Hogwarts'
-						/>
-						<Testimony
-							company_logo={ temp_logo }
-							summary="THIS IS AMAZINGGG"
-							desc="Cillum deserunt magna officia dolor duis eiusmod."
-							person_picture={ temp_picture }
-							person_name='Parry Hotter'
-							person_position='Ketua Osis Hogwarts'
-						/>
-					{/* </div> */}
+					{testimony.map((item) => item.shown === 1 ? (
+						<div key={item.id}>
+							<Testimony
+								company_logo={item.company_logo}
+								summary={item.summary}
+								desc={item.description}
+								person_picture={item.person_picture}
+								person_name={item.person_name}
+								person_position={item.person_position}
+							/>
+						</div>
+					) : null)
+					}
 				</Slider>
-			</div>
+			</div> */}
 			{/* end testimony */}
-		</div>		
+		</div>
 	);
 }
 

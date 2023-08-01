@@ -1,0 +1,23 @@
+update shown field in endpoint {
+    active_client = DONE
+    candidates = DONE
+    hero_image = DONE
+    industries = DONE
+    jobs = DONE
+    social medias = DONE
+    testimony_card = DONE
+}
+connect endpoints to FE {
+    active_client = DONE
+    candidates = DONE
+    hero_image = DONE
+    industries = DONE
+    jobs = DONE
+    social medias = DONE
+    testimony_card = DONE
+}
+
+Mailto sending webpage
+Finishing Dashboard
+CDN/File Upload
+Deployment
