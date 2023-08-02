@@ -84,11 +84,11 @@ function Home() {
 
 		const fetchData = async () => {
 			try {
-				const active_clients = await axios.get('http://localhost:3030/active_clients');
+				const active_clients = await axios.get('http://127.0.0.1:3030/active_clients');
 				setClients(active_clients.data);
-				const hero_images = await axios.get('http://localhost:3030/hero_image');
+				const hero_images = await axios.get('http://127.0.0.1:3030/hero_image');
 				setHeroImage(hero_images.data);
-				const testimony = await axios.get('http://localhost:3030/testimony_card');
+				const testimony = await axios.get('http://127.0.0.1:3030/testimony_card');
 				setTestimony(testimony.data);
 			} catch (error) {
 				console.error(error);

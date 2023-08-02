@@ -5,7 +5,7 @@ const cors = require('cors');
 // Create a connection pool to reuse connections
 const pool = mariadb.createPool({
   host: '127.0.0.1',
-  user: 'server',
+  user: 'root',
   password: '',
   database: 'hsw_headhunter'
 });
