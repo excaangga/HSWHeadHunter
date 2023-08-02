@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9f44a108.css",
+    "main.js": "/static/js/main.870230a6.js",
+    "static/js/787.c1065d5f.chunk.js": "/static/js/787.c1065d5f.chunk.js",
+    "static/media/bg.png": "/static/media/bg.e423961d7a6028d798e4.png",
+    "static/media/apply_cover.png": "/static/media/apply_cover.d10ced197aaaa014f21e.png",
+    "static/media/flag_point.png": "/static/media/flag_point.6bca14a98c772f5a7307.png",
+    "static/media/blob.png": "/static/media/blob.021390ca9f24bf950452.png",
+    "static/media/flag_point_rev.png": "/static/media/flag_point_rev.dacc2917164f3dd36eac.png",
+    "static/media/card_4.png": "/static/media/card_4.9d923e607df620cd7bcf.png",
+    "static/media/card_3.png": "/static/media/card_3.f9fd587f6e3c0a0d0464.png",
+    "static/media/card_1.png": "/static/media/card_1.d6de51b5b8f773adf723.png",
+    "static/media/SamedayService.png": "/static/media/SamedayService.aac29e6da4c378bc2447.png",
+    "static/media/card_2.png": "/static/media/card_2.24f47c1c5d0e9997af8d.png",
+    "static/media/50kShortlistedCandidates.png": "/static/media/50kShortlistedCandidates.d236ed7f37e049ee332c.png",
+    "static/media/mag_glass.png": "/static/media/mag_glass.a24b99321e212109d20c.png",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.9f44a108.css.map": "/static/css/main.9f44a108.css.map",
+    "main.870230a6.js.map": "/static/js/main.870230a6.js.map",
+    "787.c1065d5f.chunk.js.map": "/static/js/787.c1065d5f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9f44a108.css",
+    "static/js/main.870230a6.js"
+  ]
+}
