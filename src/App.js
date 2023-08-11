@@ -39,13 +39,14 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const gmail = await axios.get('http://localhost:3030/social_media_gmail');
+        const backendUrl = 'http://202.157.185.132:3030';
+        const gmail = await axios.get(backendUrl+ '/social_media_gmail');
         setGmail(gmail.data);
-        const linkedin = await axios.get('http://localhost:3030/social_media_linkedin');
+        const linkedin = await axios.get(backendUrl+ '/social_media_linkedin');
         setLinkedin(linkedin.data);
-        const wa = await axios.get('http://localhost:3030/social_media_wa');
+        const wa = await axios.get(backendUrl+ '/social_media_wa');
         setWa(wa.data);
-        const youtube = await axios.get('http://localhost:3030/social_media_youtube');
+        const youtube = await axios.get(backendUrl+ '/social_media_youtube');
         setYoutube(youtube.data);
       } catch (error) {
         console.error(error);
