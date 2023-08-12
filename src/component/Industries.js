@@ -14,7 +14,8 @@ function Industries() {
 
 		const fetchData = async () => {
 			try {
-				const industries = await axios.get('http://localhost:3030/industries');
+				const backendUrl = 'http://202.157.185.132:3030';
+				const industries = await axios.get(backendUrl + '/industries');
 				setIndustries(industries.data);
 			} catch (error) {
 				console.error(error);

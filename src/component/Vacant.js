@@ -20,7 +20,8 @@ function Vacant() {
 
 		const fetchData = async () => {
 			try {
-				const jobs = await axios.get('http://localhost:3030/jobs');
+				const backendUrl = 'http://202.157.185.132:3030';
+				const jobs = await axios.get(backendUrl + '/jobs');
 				setJobs(jobs.data);
 			} catch (error) {
 				console.error(error);

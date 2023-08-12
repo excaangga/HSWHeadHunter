@@ -24,7 +24,8 @@ export const VacantDetail = () => {
 
         const fetchData = async () => {
             try {
-                const detail = await axios.get('http://localhost:3030/jobs/' + id);
+                const backendUrl = 'http://202.157.185.132:3030';
+                const detail = await axios.get(backendUrl + '/jobs/' + id);
                 setDetail(detail.data);
             } catch (error) {
                 console.error(error);

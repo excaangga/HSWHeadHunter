@@ -14,7 +14,8 @@ function Candidates (){
 
 		const fetchData = async () => {
 			try {
-				const candidates = await axios.get('http://localhost:3030/candidates');
+				const backendUrl = 'http://202.157.185.132:3030';
+				const candidates = await axios.get(backendUrl + '/candidates');
 				setCandidates(candidates.data);
 			} catch (error) {
 				console.error(error);
