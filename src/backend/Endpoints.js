@@ -700,7 +700,12 @@ app.delete('/testimony_card/:id', async (req, res) => {
 app.get('/jobs', async (req, res) => {
   try {
     const rows = await pool.query('SELECT * FROM jobs');
-    const serializedResult = rows.map(row => ({ ...row, id: row.id.toString() }));
+    const serializedResult = rows.map(row => ({
+      ...row,
+      id: row.id.toString(),
+      requirements: JSON.parse(row.requirements),
+      job_desc: JSON.parse(row.job_desc)
+    }));
     res.json(serializedResult);
   } catch (err) {
     console.error(err);
@@ -715,7 +720,12 @@ app.get('/jobs/:id', async (req, res) => {
     if (rows.length === 0) {
       res.status(404).json({ message: 'Data not found' });
     } else {
-      const data = { ...rows[0], id: rows[0].id.toString() };
+      const data = {
+        ...rows[0],
+        id: rows[0].id.toString(),
+        requirements: JSON.parse(rows[0].requirements),
+        job_desc: JSON.parse(rows[0].job_desc)
+      };
       res.json(data);
     }
   } catch (err) {
