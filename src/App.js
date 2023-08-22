@@ -97,9 +97,9 @@ function App() {
                       HSW Headhunter
                     </div>
                     <div className='hidden items-center lg:space-x-8 lg:flex lg:ml-8 xl:space-x-16 xl:ml-14 text-xl' onClick={() => { setShowModal(false); setShowBanner(true) }}>
-                      <span className='text-gray-500 hover:text-gray-900'><Link to="/">Homepage</Link></span>
+                      <span className='text-gray-500 hover:text-gray-900'><Link to="/">Home</Link></span>
                       <span className='text-gray-500 hover:text-gray-900'><Link to="/industries">Industries</Link></span>
-                      <span className='text-gray-500 hover:text-gray-900'><Link to="/candidates">Candidates</Link></span>
+                      <span className='text-gray-500 hover:text-gray-900'><Link to="/candidates">Available Candidates</Link></span>
                       <span className='text-gray-500 hover:text-gray-900'><Link to="/vacant">Job Gallery</Link></span>
                     </div>
                   </nav>
@@ -214,7 +214,7 @@ function App() {
                       HSW Headhunter
                   </div> */}
                   <div className='xl:flex space-y-2 sm:space-y-4 justify-between items-end text-md sm:text-2xl text-blue-700 font-medium' onClick={() => { setShowModal(false); setShowBanner(true) }}>
-                    <div><Link to="/">Homepage</Link></div>
+                    <div><Link to="/">Home</Link></div>
                     <div><Link to="/industries">Industries</Link></div>
                     <div><Link to="/candidates">Available Candidates</Link></div>
                     <div><Link to="/vacant">Job Gallery</Link></div>
