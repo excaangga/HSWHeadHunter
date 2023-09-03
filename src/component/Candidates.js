@@ -25,8 +25,8 @@ function Candidates (){
 		// Fetch data initially
 		fetchData();
 		return () => {
-			element1.classList.remove("bg-white");
-			element2.classList.remove("bg-white");
+			// element1.classList.remove("bg-white");
+			// element2.classList.remove("bg-white");
 		}
 	}, []);
 	return(
