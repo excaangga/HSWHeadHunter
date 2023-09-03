@@ -15,7 +15,7 @@ export const VacantDetail = () => {
     let navigate = useNavigate();
     const [showComponent, setShowComponent] = useState(false);
     const ref = useRef(null);
-    const scrollTo = (ref.current?.scrollIntoView({ behavior: 'smooth' }));
+    const scrollToApply = () => {ref.current?.scrollIntoView({ behavior: 'smooth' }); console.log('scrollToApply called')}
     useEffect(() => {
         window.scrollTo(0, 0);
 
@@ -61,7 +61,7 @@ export const VacantDetail = () => {
         sendForm('service_zmn54bb', 'template_o5ygqpn', formRef.current)
             .then((result) => {
                 console.log(result.text);
-                alert('Message sent, thank you.');
+                alert('Awesome! Your application was succesfully received. Thanks! Our hiring team will review in details.');
             }, (error) => {
                 console.log(error.text);
                 alert('Message was not sent, wait and refresh. If this still shows, contact clientrelation@hswheadhunter.com');
@@ -78,7 +78,7 @@ export const VacantDetail = () => {
                         <div className="flex items-center justify-center container w-12 h-8 sm:h-14 sm:w-20 p-4 cursor-default shadow-lg border mx-8 text-[10px] sm:text-xl font-bold text-blue-700 text-center rounded-full hover:shadow-2xl" onClick={() => navigate(-1)}>
                             &#9001; &#9001;
                         </div>
-                        <div className="lg:hidden container w-auto sm:w-48 h-8 sm:h-14 flex items-center justify-center cursor-default text-center text-sm sm:text-xl text-white px-8 sm:px-10 py-2 bg-blue-700 rounded-xl hover:bg-blue-500 mr-8 sm:mr-0" onClick={() => { setShowComponent(true); scrollTo() }}>
+                        <div className="lg:hidden container w-auto sm:w-48 h-8 sm:h-14 flex items-center justify-center cursor-default text-center text-sm sm:text-xl text-white px-8 sm:px-10 py-2 bg-blue-700 rounded-xl hover:bg-blue-500 mr-8 sm:mr-0" onClick={() => { setShowComponent(true); scrollToApply() }}>
                             Apply Now
                         </div>
                     </div>
@@ -92,7 +92,7 @@ export const VacantDetail = () => {
                                 {detail.location} | {detail.work_time} | {detail.position}
                             </div>
                         </div>
-                        <div className="hidden lg:block container w-48 h-12 cursor-default text-center text-xl text-white px-10 py-2 bg-blue-700 rounded-xl hover:bg-blue-500" onClick={() => { setShowComponent(true); scrollTo() }}>
+                        <div className="hidden lg:block container w-48 h-12 cursor-default text-center text-xl text-white px-10 py-2 bg-blue-700 rounded-xl hover:bg-blue-500" onClick={() => { setShowComponent(true); scrollToApply() }}>
                             Apply Now
                         </div>
                     </div>
@@ -129,7 +129,7 @@ export const VacantDetail = () => {
                         </div>
                     </div>
                     {/* apply button 2 */}
-                    <div className="container w-36 sm:w-48 h-8 sm:h-14 flex items-center justify-center cursor-default text-center text-sm sm:text-xl text-white px-8 sm:px-10 py-2 bg-blue-700 rounded-xl hover:bg-blue-500 mt-12 ml-8" onClick={() => { setShowComponent(true); scrollTo() }}>
+                    <div className="container w-36 sm:w-48 h-8 sm:h-14 flex items-center justify-center cursor-default text-center text-sm sm:text-xl text-white px-8 sm:px-10 py-2 bg-blue-700 rounded-xl hover:bg-blue-500 mt-12 ml-8" onClick={() => { setShowComponent(true); scrollToApply() }}>
                         Apply Now
                     </div>
                     {/* back button 2 */}
@@ -155,12 +155,12 @@ export const VacantDetail = () => {
                                             Name
                                             <span className="text-red-500">*</span>
                                         </div>
-                                        <input name='name' className="w-full px-3 text-sm sm:text-xl bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-3 md:mb-6" placeholder="Enter your full name" type="text"></input>
+                                        <input required name='name' className="w-full px-3 text-sm sm:text-xl bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-3 md:mb-6" placeholder="Enter your full name" type="text"></input>
                                         <div className="text-sm sm:text-xl font-bold mb-3">
                                             Current Position
                                             <span className="text-red-500">*</span>
                                         </div>
-                                        <input name='current_pos' className="w-full px-3 text-sm sm:text-xl bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-3 md:mb-6" placeholder="Ex: Tax Manager" type="text"></input>
+                                        <input required name='current_pos' className="w-full px-3 text-sm sm:text-xl bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-3 md:mb-6" placeholder="Ex: Tax Manager" type="text"></input>
                                         {/* TODO change to props for email */}
                                         {/* <div className="text-sm sm:text-xl font-bold mb-3">
                                             Apply For
@@ -172,7 +172,7 @@ export const VacantDetail = () => {
                                             Upload CV (attach a Google Drive link below)
                                             <span className="text-red-500">*</span>
                                         </div>
-                                        <input name='link' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Enter Google Drive link containing the file" type="text"></input>
+                                        <input required name='link' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Enter Google Drive link containing the file" type="text"></input>
                                         {/* submit button */}
                                         <button type="submit" className="w-full py-2 sm:py-5 text-sm sm:text-xl text-white bg-blue-700 rounded-2xl flex justify-center items-center hover:bg-blue-500 cursor-default">Submit</button>
                                     </div>

@@ -6,6 +6,7 @@ function Industries() {
 	const [industries, setIndustries] = useState([]);
 	useEffect(() => {
 		window.scrollTo(0, 0);
+		document.title = "HSW HeadHunter | Industries";
 
 		const element1 = document.getElementById("header");
 		const element2 = document.getElementById("nav");
@@ -39,7 +40,7 @@ function Industries() {
 			<div className="container flex text-center justify-center text-xs sm:text-xl xl:text-3xl 2xl:text-4xl font-medium text-white mx-auto">
 				<div className="flex flex-col items-end w-full lg:w-1/2 2xl:w-5/12 ml-auto space-y-5">
 					{industries.map((item, index) =>
-						item.shown === 1 && index <= 7 ? (
+						item.shown === 1 && index < 7 ? (
 							<div
 								key={item.id}
 								className="grid grid-cols-1 bg-[url('../public/flag_point_rev.png')] xl:bg-[url('../public/flag_point.png')] bg-contain bg-no-repeat bg-center h-12 sm:h-20 lg:h-32 w-11/12 2xl:w-full"
@@ -53,7 +54,7 @@ function Industries() {
 				</div>
 				<div className="flex flex-col items-start w-full lg:w-1/2 2xl:w-5/12 lg:mt-16 mr-auto space-y-5">
 					{industries.map((item, index) =>
-						item.shown === 1 && index > 7 ? (
+						item.shown === 1 && index >= 7 ? (
 							<div
 								key={item.id}
 								className="grid grid-cols-1 bg-[url('../public/flag_point_rev.png')] xl:bg-[url('../public/flag_point.png')] bg-contain bg-no-repeat bg-center h-12 sm:h-20 lg:h-32 w-11/12 2xl:w-full"

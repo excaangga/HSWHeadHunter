@@ -59,28 +59,29 @@ function Home() {
 		else if (window.innerWidth >= 1280 && window.innerWidth < 1536) { setBreakpoint('xl') }
 		else if (window.innerWidth >= 1536) { setBreakpoint('2xl') }
 	};
-	function handleScroll() {
-		const scrollPosition = window.scrollY;
-		const targetPosition = 270;
-		const element1 = document.getElementById("header");
-		const element2 = document.getElementById("nav");
-		if (scrollPosition >= targetPosition) {
-			element1.classList.add("bg-white");
-			element2.classList.add("bg-white");
-		} else {
-			element1.classList.remove("bg-white");
-			element2.classList.remove("bg-white");
-		}
-	}
+	// function handleScroll() {
+	// 	const scrollPosition = window.scrollY;
+	// 	const targetPosition = 270;
+	// 	const element1 = document.getElementById("header");
+	// 	const element2 = document.getElementById("nav");
+	// 	if (scrollPosition >= targetPosition) {
+	// 		element1.classList.add("bg-white");
+	// 		element2.classList.add("bg-white");
+	// 	} else {
+	// 		element1.classList.remove("bg-white");
+	// 		element2.classList.remove("bg-white");
+	// 	}
+	// }
 	const [clients, setClients] = useState([]);
 	const [heroImage, setHeroImage] = useState([]);
 	const [testimony, setTestimony] = useState([]);
 	useEffect(() => {
 		// window.scrollTo(0, 0);
-		window.addEventListener("scroll", handleScroll);
+		// window.addEventListener("scroll", handleScroll);
 		window.addEventListener("resize", handleResize);
-		handleScroll();
+		// handleScroll();
 		handleResize();
+		document.title = "HSW HeadHunter | Home";
 
 		const fetchData = async () => {
 			try {
@@ -97,7 +98,8 @@ function Home() {
 		};
 		// Fetch data initially
 		fetchData();
-		return () => { window.removeEventListener("scroll", handleScroll); window.removeEventListener('resize', handleResize); };
+		// put inside return: window.removeEventListener("scroll", handleScroll);
+		return () => { window.removeEventListener('resize', handleResize); };
 	}, []);
 	var settings_testimony;
 	if (breakpoint === 'sm') {
@@ -151,11 +153,11 @@ function Home() {
 				<div key={item.id}>
 					<img
 						src={item.image_path}
-						className='hidden md:block lg:hidden relative top-0 left-0 w-full opacity-0'
+						className='hidden md:block lg:hidden mt-28 mx-0 w-full opacity-0'
 					/>
 					<img
 						src={item.image_path}
-						className='hidden md:block lg:hidden absolute top-0 left-0 w-full'
+						className='hidden md:block lg:hidden absolute top-20 left-0 w-full'
 					/>
 				</div>
 			) : null)
@@ -164,11 +166,11 @@ function Home() {
 				<div key={item.id}>
 					<img
 						src={item.image_path}
-						className='md:hidden relative top-0 left-0 w-full opacity-0'
+						className='md:hidden mt-20 sm:mt-28 mx-0 w-full opacity-0'
 					/>
 					<img
 						src={item.image_path}
-						className='md:hidden absolute top-0 left-0 w-full'
+						className='block md:hidden absolute top-16 sm:top-20 left-0 w-full'
 					/>
 				</div>
 			) : null)
@@ -176,14 +178,14 @@ function Home() {
 			{/* end filler */}
 
 			{/* desc */}
-			<div className='container-fill lg:grid grid-cols-2 justify-center lg:mx-8 xl:mx-20 mb-4 xl:mb-12 2xl:mb-20 sm:mt-6'>
+			<div className='container-fill lg:grid grid-cols-2 justify-center mb-4 xl:mb-12 2xl:mb-20 sm:mt-6 md:mt-12 xl:mt-20'>
 				{/* left desc */}
-				<div className='self-center col-span-1 text-gray-700 lg:w-10/12 sm:my-10 lg:my-0 lg:mt-10'>
+				<div className='self-center col-span-1 text-gray-700 mb-10 lg:mb-0'>
 					<div className='text-2xl sm:text-4xl lg:text-5xl 2xl:text-6xl mb-5 font-medium text-center lg:text-start'>
 						Why Us?
 					</div>
 					<div className='text-sm sm:text-base 2xl:text-2xl mb-5 text-justify lg:text-start'>
-						Jakarta based professional headhunter which focus on searching experience candidates for our clients who put “ me” as top priority for their investment and business.
+						Jakarta based professional headhunter which focus on searching experience candidates for our clients who put “time” as top priority for their investment and business.
 					</div>
 					<div className='text-sm sm:text-base 2xl:text-2xl mb-5 text-justify lg:text-start'>
 						Appointed by global clients in Europe, USA, Japan, Singapore, Malaysia Australia, North African, Middle East, Vietnam, Philippines.
@@ -191,7 +193,7 @@ function Home() {
 					<div className='text-sm sm:text-base 2xl:text-2xl mb-10 xl:mb-14 text-justify lg:text-start'>
 						Our candidates come from Indonesian, Singaporean, Malaysian, Westerner, Australian, Philippines, Indian and Arabian.
 					</div>
-					<div className='flex flex-col justify-center items-center space-y-4 xl:space-y-8 lg:mb-10 lg:w-[90%]'>
+					<div className='flex flex-col justify-center items-center space-y-4 xl:space-y-8 lg:mb-10'>
 						<div className='container flex space-x-4 justify-between'>
 							<img
 								src={icon_active_client}
@@ -223,11 +225,11 @@ function Home() {
 					</div>
 				</div>
 				{/* right desc */}
-				<div className='self-center col-span-1 grid grid-cols-2 2xl:gap-10 lg:ml-4'>
-					<img src={card_1} alt='' className='object-scale-down mx-auto h-40 w-40 md:h-56 md:w-56 2xl:h-80  2xl:w-80 hover:shadow-xl hover:border-t-2 hover:border-blue-700 rounded-xl lg:self-end' />
-					<img src={card_2} alt='' className='object-scale-down mx-auto h-40 w-40 md:h-56 md:w-56 2xl:h-80  2xl:w-80 hover:shadow-xl hover:border-t-2 hover:border-blue-700 rounded-xl lg:self-end' />
-					<img src={card_3} alt='' className='object-scale-down mx-auto h-40 w-40 md:h-56 md:w-56 2xl:h-80  2xl:w-80 hover:shadow-xl hover:border-t-2 hover:border-blue-700 rounded-xl lg:self-start' />
-					<img src={card_4} alt='' className='object-scale-down mx-auto h-40 w-40 md:h-56 md:w-56 2xl:h-80  2xl:w-80 hover:shadow-xl hover:border-t-2 hover:border-blue-700 rounded-xl lg:self-start' />
+				<div className='col-span-1 grid grid-cols-2 gap-y-5 lg:gap-y-0 lg:ml-4 w-[80%] lg:w-full mx-auto mb-10 lg:mb-0'>
+					<img src={card_1} alt='' className='object-scale-down mx-auto h-40 w-40 md:h-56 md:w-56 2xl:h-80  2xl:w-80 hover:shadow-xl hover:border-t-2 hover:border-blue-700 rounded-xl self-center' />
+					<img src={card_2} alt='' className='object-scale-down mx-auto h-40 w-40 md:h-56 md:w-56 2xl:h-80  2xl:w-80 hover:shadow-xl hover:border-t-2 hover:border-blue-700 rounded-xl self-center' />
+					<img src={card_3} alt='' className='object-scale-down mx-auto h-40 w-40 md:h-56 md:w-56 2xl:h-80  2xl:w-80 hover:shadow-xl hover:border-t-2 hover:border-blue-700 rounded-xl self-center' />
+					<img src={card_4} alt='' className='object-scale-down mx-auto h-40 w-40 md:h-56 md:w-56 2xl:h-80  2xl:w-80 hover:shadow-xl hover:border-t-2 hover:border-blue-700 rounded-xl self-center' />
 				</div>
 			</div>
 			{/* end desc */}

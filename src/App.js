@@ -83,9 +83,9 @@ function App() {
             <div className='font-DMSans bg-white'>
               <Router>
                 {/* a whole container for nav */}
-                <div id='header' className='flex px-3 sm:px-12 mx-auto container-fill py-4 items-center justify-between sticky top-0 z-30 lg:bg-white'>
+                <div id='header' className='flex px-3 sm:pr-12 sm:pl-4 mx-auto container-fill py-3 lg:py-4 items-center justify-between sticky top-0 z-30 bg-white'>
                   {/* nav consisted of logo and a list of links for md++ */}
-                  <nav id='nav' className='lg:bg-white flex items-center'>
+                  <nav id='nav' className='bg-white flex items-center'>
                     <div className='h-8 sm:h-14 w-8 sm:w-14 lg:mx-8'>
                       <img
                         src={logo}
@@ -224,7 +224,7 @@ function App() {
               {/* copyright and subs button goes here */}
               <div className='container-fill mx-auto justify-center xl:flex space-y-12 xl:space-y-0  items-center pb-16 w-10/12'>
                 <div className='text-xs sm:text-xl text-gray-500 text-center'>
-                  Rejuvenated 04022023 | HSW Headhunter
+                  Rejuvenated 2023 | HSW Headhunter
                 </div>
                 {/* <div className='2xl:w-7/12 flex justify-end items-center'>
                   <div className="container-fill flex mb-3 bg-white w-full h-12 sm:h-16 2xl:w-7/12 items-center justify-between rounded-full shadow-xl hover:shadow-2xl border">

@@ -11,7 +11,7 @@ function Employer() {
         sendForm('service_zmn54bb', 'template_i4l6gfo', formRef.current)
             .then((result) => {
                 console.log(result.text);
-                alert('Message sent, thank you.');
+                alert('Thanks for your interest. Our manager will contact you soon and discuss everything in details.');
             }, (error) => {
                 console.log(error.text);
                 alert('Message was not sent, wait and refresh. If this still shows, contact clientrelation@hswheadhunter.com');
@@ -34,21 +34,22 @@ function Employer() {
                             Employer Name
                             <span className="text-red-500">*</span>
                         </div>
-                        <input name='name' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Enter your full name" type="text"></input>
+                        <input required name='name' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Enter your full name" type="text"></input>
                         <div className="lg:flex justify-between">
                             <div className="w-full lg:w-1/2 mr-12">
                                 <div className="font-bold sm:mb-3">
                                     Contact Person
                                     <span className="text-red-500">*</span>
                                 </div>
-                                <input name='contact' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Ex: 08xxxxxxxxxx" type="text"></input>
+                                <input required pattern="[0-9]+" // Only allows numbers
+                                    title="Please enter a valid phone number (only numbers allowed)" name='contact' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Ex: 08xxxxxxxxxx" type="text"></input>
                             </div>
                             <div className="w-full lg:w-1/2">
                                 <div className="font-bold sm:mb-3">
                                     Available Vacant
                                     <span className="text-red-500">*</span>
                                 </div>
-                                <input name='job_name' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Ex: Tax Manager" type="text"></input>
+                                <input required name='job_name' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Ex: Tax Manager" type="text"></input>
                             </div>
                         </div>
                         <div className="lg:flex justify-between">
@@ -57,21 +58,22 @@ function Employer() {
                                     Est. Join Date
                                     <span className="text-red-500">*</span>
                                 </div>
-                                <input name='join_date' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" type="date"></input>
+                                <input required name='join_date' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" type="date"></input>
                             </div>
                             <div className="w-full lg:w-1/2">
                                 <div className="font-bold sm:mb-3">
                                     Range Salary (IDR)
                                     <span className="text-red-500">*</span>
                                 </div>
-                                <input name='salary' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Ex: 4200000" type="text"></input>
+                                <input required pattern="[0-9]+" // Only allows numbers
+                                    title="Please enter a valid salary (only numbers allowed)" name='salary' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Ex: 4200000" type="text"></input>
                             </div>
                         </div>
                         <div className="font-bold sm:mb-3">
                             Upload Jobdesc (attach a Google Drive link below)
                             <span className="text-red-500">*</span>
                         </div>
-                        <input name='link' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Enter Google Drive link containing the file" type="text"></input>
+                        <input required name='link' className="w-full px-3 bg-white h-8 sm:h-14 rounded-md focus:outline-none border mb-2 sm:mb-6" placeholder="Enter Google Drive link containing the file" type="text"></input>
                         {/* submit button */}
                         <button type="submit" className="w-full py-2 sm:py-5 text-white bg-blue-700 rounded-2xl flex justify-center items-center hover:bg-blue-500 cursor-default">Submit</button>
                     </div>

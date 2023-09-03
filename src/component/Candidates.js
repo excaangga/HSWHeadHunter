@@ -6,6 +6,7 @@ function Candidates (){
 	const [candidates, setCandidates] = useState([]);
 	useEffect(() => {
 		window.scrollTo(0, 0);
+		document.title = "HSW HeadHunter | Available Candidates";
 		
 		const element1 = document.getElementById("header");
 		const element2 = document.getElementById("nav");			
