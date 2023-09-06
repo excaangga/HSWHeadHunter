@@ -15,6 +15,7 @@ import shorlisted_candidates from '../assets/50kShortlistedCandidates.png';
 import countries from '../assets/15Countries.png';
 import sameday_service from '../assets/SamedayService.png';
 import hospitality from '../assets/247Hospitality.png';
+import icon_advantages from '../assets/icon_advantages.png';
 
 function Home() {
 	const settings_client = {
@@ -178,7 +179,7 @@ function Home() {
 			{/* end filler */}
 
 			{/* desc */}
-			<div className='container-fill lg:grid grid-cols-2 justify-center mb-4 xl:mb-12 2xl:mb-20 sm:mt-6 md:mt-12 xl:mt-20'>
+			<div className='container-fill lg:grid grid-cols-2 justify-center mb-4 lg:mb-12 2xl:mb-20 sm:mt-6 md:mt-12 xl:mt-20'>
 				{/* left desc */}
 				<div className='self-center col-span-1 text-gray-700 mb-10 lg:mb-0'>
 					<div className='text-2xl sm:text-4xl lg:text-5xl 2xl:text-6xl mb-5 font-medium text-center lg:text-start'>
@@ -188,12 +189,12 @@ function Home() {
 						Jakarta based professional headhunter which focus on searching experience candidates for our clients who put “time” as top priority for their investment and business.
 					</div>
 					<div className='text-sm sm:text-base 2xl:text-2xl mb-5 text-justify lg:text-start'>
-						Appointed by global clients in Europe, USA, Japan, Singapore, Malaysia Australia, North African, Middle East, Vietnam, Philippines.
+						Appointed by global clients in Europe, USA, Japan, Singapore, Malaysia, Australia, North African, Middle East, Vietnam, Philippines.
 					</div>
 					<div className='text-sm sm:text-base 2xl:text-2xl mb-10 xl:mb-14 text-justify lg:text-start'>
 						Our candidates come from Indonesian, Singaporean, Malaysian, Westerner, Australian, Philippines, Indian and Arabian.
 					</div>
-					<div className='flex flex-col justify-center items-center space-y-4 xl:space-y-8 lg:mb-10'>
+					{/* <div className='flex flex-col justify-center items-center space-y-4 xl:space-y-8 lg:mb-10'>
 						<div className='container flex space-x-4 justify-between'>
 							<img
 								src={icon_active_client}
@@ -222,7 +223,8 @@ function Home() {
 								className='object-scale-down h-[20%] w-[20%]'
 							/>
 						</div>
-					</div>
+					</div> */}
+					<img src={icon_advantages} alt='' className='w-full'></img>
 				</div>
 				{/* right desc */}
 				<div className='col-span-1 grid grid-cols-2 gap-y-5 lg:gap-y-0 lg:ml-4 w-[80%] lg:w-full mx-auto mb-10 lg:mb-0'>
