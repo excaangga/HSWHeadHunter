@@ -1,6 +1,6 @@
 import React from "react";
 import { init, sendForm } from '@emailjs/browser';
-init('E_FO3--pEZAv1zsc-');
+init('zTi_Y5jFd6hh_R-Nb');
 
 function Employer() {
     const formRef = React.useRef();
@@ -8,7 +8,7 @@ function Employer() {
     const sendEmail = (e) => {
         e.preventDefault();
 
-        sendForm('service_zmn54bb', 'template_i4l6gfo', formRef.current)
+        sendForm('service_s6j5mpk', 'template_ki4o1fq', formRef.current)
             .then((result) => {
                 console.log(result.text);
                 alert('Thanks for your interest. Our manager will contact you soon and discuss everything in details.');
