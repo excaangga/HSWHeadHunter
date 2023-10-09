@@ -1,6 +1,7 @@
 const express = require('express');
 const mariadb = require('mariadb/promise');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
 
 // Create a connection pool to reuse connections
 const pool = mariadb.createPool({
@@ -14,6 +15,39 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
+
+app.get('/auth/:uname', async (req, res) => {
+  const uname = req.params.uname;
+  try {
+    const result = await pool.query('SELECT * FROM auth WHERE username = ?', [uname]);
+    if (result.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+    } else {
+      const auth = { ...result[0], id: result[0].id.toString() };
+      res.json(auth);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.put('/auth/:uname', async (req, res) => {
+  const uname = req.params.uname;
+  const { password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  try {
+    const result = await pool.query('UPDATE auth SET password = ? WHERE username = ?', [hashedPassword, uname]);
+    if (result.affectedRows === 0) {
+      res.status(404).json({ message: 'Data not found' });
+    } else {
+      res.status(200).json({ message: 'Data updated successfully' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 // GET all active_clients
 app.get('/active_clients', async (req, res) => {

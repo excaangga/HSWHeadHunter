@@ -2,7 +2,7 @@ const mariadb = require('mariadb');
 
 const pool = mariadb.createPool({
   host: '127.0.0.1',
-  user: 'root',
+  user: 'server',
   password: ''
 });
 
@@ -12,6 +12,13 @@ const pool = mariadb.createPool({
     conn = await pool.getConnection();
     await conn.query('CREATE DATABASE IF NOT EXISTS hsw_headhunter');
     await conn.query('USE hsw_headhunter');
+    await conn.query(`
+      CREATE TABLE IF NOT EXISTS auth (
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL
+      )
+    `);
     await conn.query(`
       CREATE TABLE IF NOT EXISTS industries (
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -82,7 +89,7 @@ const pool = mariadb.createPool({
       )
     `);
     await conn.query(`
-      CREATE TABLE jobs (
+      CREATE TABLE IF NOT EXISTS jobs (
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         job_name VARCHAR(255),
         location VARCHAR(255),
