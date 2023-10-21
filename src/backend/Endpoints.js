@@ -145,7 +145,7 @@ app.delete('/active_clients/:id', async (req, res) => {
       res.status(404).json({ message: 'Data not found' });
     } else {
       const imagePath = '../../public' + rows[0].image_path; // Adjust based on your server file structure
-
+      console.log(imagePath)
       // Delete record from the database
       const result = await pool.query('DELETE FROM active_clients WHERE id = ?', [id]);
 
