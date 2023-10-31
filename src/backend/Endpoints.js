@@ -84,7 +84,7 @@ app.post('/logo', async (req, res) => {
 app.delete('/logo/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const query = 'SELECT logo FROM active_clients WHERE id = ?';
+    const query = 'SELECT image_path FROM logo WHERE id = ?';
     const rows = await pool.query(query, [id]);
 
     if (rows.length === 0) {
