@@ -24,6 +24,7 @@ import Whatsapp from './assets/Whatsapp.png';
 import Youtube from './assets/Youtube.png';
 import Linkedin from './assets/Linkedin.png';
 import axios from 'axios';
+import Favicon from 'react-favicon';
 
 function App() {
   const [mobile, setMobile] = useState(false)
@@ -35,8 +36,17 @@ function App() {
   const [wa, setWa] = useState([]);
   const [youtube, setYoutube] = useState([]);
   const [logo, setLogo] = useState([]);
+  const [icon, setIcon] = useState('');
   var gmail_url, linkedin_url, wa_url, youtube_url, logo_url;
   useEffect(() => {
+    // FETCH ONLY THE ICON, BEWARE OF SPAGHETTI
+    fetch('http://202.157.185.132:3030/logo')
+      .then(response => response.json())
+      .then(data => {
+        const image = data[0].image_path;
+        setIcon(image);
+      })
+      .catch(error => console.error(error));
     const fetchData = async () => {
       try {
         const backendUrl = 'http://202.157.185.132:3030';
@@ -88,6 +98,8 @@ function App() {
         <MobileContext.Provider value={[mobile, setMobile]}>
           <BannerContext.Provider value={[showBanner, setShowBanner]}>
             <div className='font-DMSans bg-white'>
+              <Favicon url={icon} />
+              {console.log(icon)}
               <Router>
                 {/* a whole container for nav */}
                 <div id='header' className='flex px-3 sm:pr-12 sm:pl-4 mx-auto container-fill py-3 lg:py-4 items-center justify-between sticky top-0 z-30 bg-white'>
