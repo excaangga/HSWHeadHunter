@@ -11,7 +11,6 @@ import Candidates from './component/Candidates';
 import Vacant from './component/Vacant';
 import React, { useState, useEffect } from 'react';
 import Banner from './component/Banner';
-import logo from './assets/logo.png';
 import VacantDetail from './component/VacantDetail';
 import Modal from './component/Modal';
 import { TypeContext } from './component/TypeContext';
@@ -35,19 +34,22 @@ function App() {
   const [linkedin, setLinkedin] = useState([]);
   const [wa, setWa] = useState([]);
   const [youtube, setYoutube] = useState([]);
-  var gmail_url, linkedin_url, wa_url, youtube_url;
+  const [logo, setLogo] = useState([]);
+  var gmail_url, linkedin_url, wa_url, youtube_url, logo_url;
   useEffect(() => {
     const fetchData = async () => {
       try {
         const backendUrl = 'http://202.157.185.132:3030';
-        const gmail = await axios.get(backendUrl+ '/social_media_gmail');
+        const gmail = await axios.get(backendUrl + '/social_media_gmail');
         setGmail(gmail.data);
-        const linkedin = await axios.get(backendUrl+ '/social_media_linkedin');
+        const linkedin = await axios.get(backendUrl + '/social_media_linkedin');
         setLinkedin(linkedin.data);
-        const wa = await axios.get(backendUrl+ '/social_media_wa');
+        const wa = await axios.get(backendUrl + '/social_media_wa');
         setWa(wa.data);
-        const youtube = await axios.get(backendUrl+ '/social_media_youtube');
+        const youtube = await axios.get(backendUrl + '/social_media_youtube');
         setYoutube(youtube.data);
+        const logo = await axios.get(backendUrl + '/logo');
+        setLogo(logo.data);
       } catch (error) {
         console.error(error);
       }
@@ -75,6 +77,11 @@ function App() {
       youtube_url = item.url
     ) : null
   )
+  logo.map((item, index) =>
+    item.image_path != null ? (
+      logo_url = item.image_path
+    ) : null
+  )
   return (
     <ModalContext.Provider value={[showModal, setShowModal]}>
       <TypeContext.Provider value={[typeForm, setTypeForm]}>
@@ -88,7 +95,7 @@ function App() {
                   <nav id='nav' className='bg-white flex items-center'>
                     <div className='h-8 sm:h-14 w-8 sm:w-14 lg:mx-8'>
                       <img
-                        src={logo}
+                        src={logo_url}
                         className='object-scale-down h-8 sm:h-14 w-8 sm:w-14'
                         alt=''
                       />
