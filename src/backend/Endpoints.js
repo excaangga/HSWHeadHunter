@@ -26,6 +26,90 @@ const storage = multer.diskStorage({
   }
 });
 
+app.get('/logo', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM logo');
+    const serializedResult = result.map(row => {
+      return { ...row, id: row.id.toString() };
+    });
+    res.json(serializedResult);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.get('/logo/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await pool.query('SELECT * FROM logo WHERE id = ?', [id]);
+    if (result.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+    } else {
+      const logo = { ...result[0], id: result[0].id.toString() };
+      res.json(logo);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Initialize upload
+const uploadLogo = multer({
+  storage: storage
+}).single('logo'); // Assuming the field name in the form is 'activeClients'
+
+// Create a data with image upload
+app.post('/logo', async (req, res) => {
+  try {
+    uploadLogo(req, res, async function(err) {
+      if(err){
+        console.error(err);
+        res.status(500).json({ message: 'File upload error' });
+      } else {
+        const image_path = '/images/' + req.file.originalname; // Relative path
+        const query = 'INSERT INTO logo (image_path) VALUES (?)';
+        await pool.query(query, [image_path]);
+        res.status(201).json({ message: 'Data inserted successfully' });
+      }
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Delete a data by ID with image file deletion
+app.delete('/logo/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const query = 'SELECT logo FROM active_clients WHERE id = ?';
+    const rows = await pool.query(query, [id]);
+
+    if (rows.length === 0) {
+      res.status(404).json({ message: 'Data not found' });
+    } else {
+      const imagePath = './public' + rows[0].image_path; // Adjust based on your server file structure
+      console.log(imagePath)
+      // Delete record from the database
+      const result = await pool.query('DELETE FROM logo WHERE id = ?', [id]);
+
+      if (result.affectedRows === 0) {
+        res.status(404).json({ message: 'Data not found' });
+      } else {
+        // Delete image file from the file system
+        fs.unlinkSync(imagePath);
+
+        res.status(200).json({ message: 'Data and file deleted successfully' });
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 app.get('/auth/:uname', async (req, res) => {
   const uname = req.params.uname;
   try {
@@ -111,7 +195,7 @@ app.put('/active_clients/:id', async (req, res) => {
 // Initialize upload
 const uploadClient = multer({
   storage: storage
-}).single('activeClients'); // Assuming the field name in the form is 'heroImage'
+}).single('activeClients'); // Assuming the field name in the form is 'activeClients'
 
 // Create a data with image upload
 app.post('/active_clients', async (req, res) => {

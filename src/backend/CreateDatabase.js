@@ -13,6 +13,12 @@ const pool = mariadb.createPool({
     await conn.query('CREATE DATABASE IF NOT EXISTS hsw_headhunter');
     await conn.query('USE hsw_headhunter');
     await conn.query(`
+      CREATE TABLE IF NOT EXISTS logo (
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        image_path VARCHAR(255) NOT NULL
+      )
+    `);
+    await conn.query(`
       CREATE TABLE IF NOT EXISTS auth (
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(255) NOT NULL,
