@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/ico.ico" />
+    <link id="favicon" rel="icon" href="%PUBLIC_URL%/ico.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -33,6 +33,15 @@
   <body>
     <noscript>You need to enable JavaScript to run this app. Contact us at clientrelation@hswheadhunter.com for direct communication.</noscript>
     <div id="root"></div>
+    <script>
+      fetch('http://202.157.185.132:3030/logo')
+        .then(response => response.json())
+        .then(data => {
+          const image = 'http://202.157.185.132:3030' + data[0].image_path;
+          document.getElementById('favicon').href = image;
+        })
+        .catch(error => console.error(error));
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
